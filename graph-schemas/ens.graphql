@@ -277,6 +277,7 @@ scalar BigInt
 input Block_height {
   hash: Bytes
   number: Int
+  number_gte: Int
 }
 
 scalar Bytes
@@ -1238,9 +1239,12 @@ type Query {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1257,9 +1261,12 @@ type Query {
     where: Domain_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1272,9 +1279,12 @@ type Query {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1291,9 +1301,12 @@ type Query {
     where: Transfer_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1306,9 +1319,12 @@ type Query {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1325,9 +1341,12 @@ type Query {
     where: NewOwner_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1340,9 +1359,12 @@ type Query {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1359,9 +1381,12 @@ type Query {
     where: NewResolver_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1374,9 +1399,12 @@ type Query {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1393,9 +1421,12 @@ type Query {
     where: NewTTL_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1408,9 +1439,12 @@ type Query {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1427,9 +1461,12 @@ type Query {
     where: Account_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1442,9 +1479,12 @@ type Query {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1461,9 +1501,12 @@ type Query {
     where: Registration_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1476,9 +1519,12 @@ type Query {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1495,9 +1541,12 @@ type Query {
     where: NameRegistered_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1510,9 +1559,12 @@ type Query {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1529,9 +1581,12 @@ type Query {
     where: NameRenewed_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1544,9 +1599,12 @@ type Query {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1563,9 +1621,12 @@ type Query {
     where: NameTransferred_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1578,9 +1639,12 @@ type Query {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1597,9 +1661,12 @@ type Query {
     where: Resolver_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1612,9 +1679,12 @@ type Query {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1631,9 +1701,12 @@ type Query {
     where: AddrChanged_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1646,9 +1719,12 @@ type Query {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1665,9 +1741,12 @@ type Query {
     where: MulticoinAddrChanged_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1680,9 +1759,12 @@ type Query {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1699,9 +1781,12 @@ type Query {
     where: NameChanged_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1714,9 +1799,12 @@ type Query {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1733,9 +1821,12 @@ type Query {
     where: AbiChanged_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1748,9 +1839,12 @@ type Query {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1767,9 +1861,12 @@ type Query {
     where: PubkeyChanged_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1782,9 +1879,12 @@ type Query {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1801,9 +1901,12 @@ type Query {
     where: TextChanged_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1816,9 +1919,12 @@ type Query {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1835,9 +1941,12 @@ type Query {
     where: ContenthashChanged_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1850,9 +1959,12 @@ type Query {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1869,9 +1981,12 @@ type Query {
     where: InterfaceChanged_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1884,9 +1999,12 @@ type Query {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1903,9 +2021,12 @@ type Query {
     where: AuthorisationChanged_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1918,9 +2039,12 @@ type Query {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1937,9 +2061,12 @@ type Query {
     where: DomainEvent_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1952,9 +2079,12 @@ type Query {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1971,9 +2101,12 @@ type Query {
     where: RegistrationEvent_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -1986,9 +2119,12 @@ type Query {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2005,9 +2141,12 @@ type Query {
     where: ResolverEvent_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2302,9 +2441,12 @@ type Subscription {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2321,9 +2463,12 @@ type Subscription {
     where: Domain_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2336,9 +2481,12 @@ type Subscription {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2355,9 +2503,12 @@ type Subscription {
     where: Transfer_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2370,9 +2521,12 @@ type Subscription {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2389,9 +2543,12 @@ type Subscription {
     where: NewOwner_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2404,9 +2561,12 @@ type Subscription {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2423,9 +2583,12 @@ type Subscription {
     where: NewResolver_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2438,9 +2601,12 @@ type Subscription {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2457,9 +2623,12 @@ type Subscription {
     where: NewTTL_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2472,9 +2641,12 @@ type Subscription {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2491,9 +2663,12 @@ type Subscription {
     where: Account_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2506,9 +2681,12 @@ type Subscription {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2525,9 +2703,12 @@ type Subscription {
     where: Registration_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2540,9 +2721,12 @@ type Subscription {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2559,9 +2743,12 @@ type Subscription {
     where: NameRegistered_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2574,9 +2761,12 @@ type Subscription {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2593,9 +2783,12 @@ type Subscription {
     where: NameRenewed_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2608,9 +2801,12 @@ type Subscription {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2627,9 +2823,12 @@ type Subscription {
     where: NameTransferred_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2642,9 +2841,12 @@ type Subscription {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2661,9 +2863,12 @@ type Subscription {
     where: Resolver_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2676,9 +2881,12 @@ type Subscription {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2695,9 +2903,12 @@ type Subscription {
     where: AddrChanged_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2710,9 +2921,12 @@ type Subscription {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2729,9 +2943,12 @@ type Subscription {
     where: MulticoinAddrChanged_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2744,9 +2961,12 @@ type Subscription {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2763,9 +2983,12 @@ type Subscription {
     where: NameChanged_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2778,9 +3001,12 @@ type Subscription {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2797,9 +3023,12 @@ type Subscription {
     where: AbiChanged_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2812,9 +3041,12 @@ type Subscription {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2831,9 +3063,12 @@ type Subscription {
     where: PubkeyChanged_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2846,9 +3081,12 @@ type Subscription {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2865,9 +3103,12 @@ type Subscription {
     where: TextChanged_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2880,9 +3121,12 @@ type Subscription {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2899,9 +3143,12 @@ type Subscription {
     where: ContenthashChanged_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2914,9 +3161,12 @@ type Subscription {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2933,9 +3183,12 @@ type Subscription {
     where: InterfaceChanged_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2948,9 +3201,12 @@ type Subscription {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2967,9 +3223,12 @@ type Subscription {
     where: AuthorisationChanged_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -2982,9 +3241,12 @@ type Subscription {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -3001,9 +3263,12 @@ type Subscription {
     where: DomainEvent_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -3016,9 +3281,12 @@ type Subscription {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -3035,9 +3303,12 @@ type Subscription {
     where: RegistrationEvent_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -3050,9 +3321,12 @@ type Subscription {
     id: ID!
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 
@@ -3069,9 +3343,12 @@ type Subscription {
     where: ResolverEvent_filter
 
     """
-    The block at which the query should be executed. Can either be an `{ number:
-    Int }` containing the block number or a `{ hash: Bytes }` value containing a
-    block hash. Defaults to the latest block when omitted.
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
     """
     block: Block_height
 

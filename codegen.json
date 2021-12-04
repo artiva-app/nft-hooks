@@ -19,6 +19,11 @@
       "schema": "./graph-schemas/ens.graphql",
       "documents": "./src/graph-queries/ens-graph.ts",
       "plugins": ["typescript", "typescript-operations"]
+    },
+    "./src/graph-queries/editions-graph-types.ts": {
+      "schema": "./graph-schemas/editions-graph.graphql",
+      "documents": "./src/graph-queries/editions-graph.ts",
+      "plugins": ["typescript", "typescript-operations"]
     }
   }
 }

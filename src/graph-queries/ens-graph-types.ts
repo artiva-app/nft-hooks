@@ -274,6 +274,7 @@ export enum AuthorisationChanged_OrderBy {
 export type Block_Height = {
   hash?: Maybe<Scalars['Bytes']>;
   number?: Maybe<Scalars['Int']>;
+  number_gte?: Maybe<Scalars['Int']>;
 };
 
 

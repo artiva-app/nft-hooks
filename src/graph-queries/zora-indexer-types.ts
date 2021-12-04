@@ -9030,7 +9030,7 @@ export type IndexerTokenWithAuctionFragment = (
 );
 
 export type ByOwnerQueryVariables = Exact<{
-  addresses?: Maybe<Array<Scalars['String']> | Scalars['String']>;
+  addressQueryPart: String_Comparison_Exp;
   owner?: Maybe<Scalars['String']>;
   offset?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;

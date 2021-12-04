@@ -4,6 +4,7 @@ import { getAddress } from '@ethersproject/address';
 
 import { RequestError } from './RequestError';
 import {
+  EDITIONS_GRAPH_URL_BY_NETWORK,
   ENS_GRAPH_URL_BY_NETWORK,
   OPENSEA_API_URL_BY_NETWORK,
   THEGRAPH_API_URL_BY_NETWORK,
@@ -65,6 +66,8 @@ import {
 } from '../graph-queries/ens-graph-types';
 import { ArgumentsError, NotFoundError } from './ErrorUtils';
 import { convertURIToHTTPS } from './UriUtils';
+import { EDITIONS_BY_ADDRESSES } from 'src/graph-queries/editions-graph';
+import { GetEditionsQuery } from 'src/graph-queries/editions-graph-types';
 
 /**
  * Internal agent for NFT Hooks to fetch NFT information.
@@ -447,6 +450,24 @@ export class MediaFetchAgent {
 
   async loadEnsName(address: string) {
     return this.loaders.ensLoader.load(address.toLowerCase());
+  }
+
+  public async fetchEditions(
+    addresses: readonly string[],
+    first: number = 1000,
+    skip: number = 0
+  ) {
+    const fetchWithTimeout = new FetchWithTimeout(this.timeouts.Graph);
+    const client = new GraphQLClient(EDITIONS_GRAPH_URL_BY_NETWORK[this.networkId], {
+      fetch: fetchWithTimeout.fetch,
+    });
+    let query = EDITIONS_BY_ADDRESSES;
+    const response = (await client.request(query, {
+      addresses: addresses.length ? addresses : undefined,
+      first: first,
+      skip: skip,
+    })) as GetEditionsQuery;
+    return response.editions;
   }
 
   /**

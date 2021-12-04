@@ -1,0 +1,453 @@
+directive @entity on OBJECT
+
+directive @derivedFrom(field: String) on FIELD_DEFINITION
+
+directive @subgraphId(id: String) on OBJECT
+
+type _Block_ {
+  """The hash of the block"""
+  hash: Bytes
+
+  """The block number"""
+  number: Int!
+}
+
+"""The type for the top-level _meta field"""
+type _Meta_ {
+  """
+  Information about a specific subgraph block. The hash of the block
+  will be null if the _meta field has a block constraint that asks for
+  a block number. It will be filled if the _meta field has no block constraint
+  and therefore asks for the latest  block
+  
+  """
+  block: _Block_!
+
+  """The deployment ID"""
+  deployment: String!
+
+  """If `true`, the subgraph encountered indexing errors at some past block"""
+  hasIndexingErrors: Boolean!
+}
+
+enum _SubgraphErrorPolicy_ {
+  """Data will be returned even if the subgraph has indexing errors"""
+  allow
+
+  """
+  If the subgraph has indexing errors, data will be omitted. The default.
+  """
+  deny
+}
+
+scalar BigDecimal
+
+scalar BigInt
+
+input Block_height {
+  hash: Bytes
+  number: Int
+  number_gte: Int
+}
+
+scalar Bytes
+
+type Edition {
+  id: ID!
+  owner: String!
+  name: String!
+  description: String
+  salePrice: BigInt
+  totalSupply: BigInt
+  editionSize: BigInt!
+  purchased(skip: Int = 0, first: Int = 100, orderBy: Purchase_orderBy, orderDirection: OrderDirection, where: Purchase_filter): [Purchase!]!
+  address: String!
+  imageURL: String
+  imageHash: Bytes
+  animationURL: String
+  animationHash: Bytes
+}
+
+input Edition_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  owner: String
+  owner_not: String
+  owner_gt: String
+  owner_lt: String
+  owner_gte: String
+  owner_lte: String
+  owner_in: [String!]
+  owner_not_in: [String!]
+  owner_contains: String
+  owner_not_contains: String
+  owner_starts_with: String
+  owner_not_starts_with: String
+  owner_ends_with: String
+  owner_not_ends_with: String
+  name: String
+  name_not: String
+  name_gt: String
+  name_lt: String
+  name_gte: String
+  name_lte: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  description: String
+  description_not: String
+  description_gt: String
+  description_lt: String
+  description_gte: String
+  description_lte: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  salePrice: BigInt
+  salePrice_not: BigInt
+  salePrice_gt: BigInt
+  salePrice_lt: BigInt
+  salePrice_gte: BigInt
+  salePrice_lte: BigInt
+  salePrice_in: [BigInt!]
+  salePrice_not_in: [BigInt!]
+  totalSupply: BigInt
+  totalSupply_not: BigInt
+  totalSupply_gt: BigInt
+  totalSupply_lt: BigInt
+  totalSupply_gte: BigInt
+  totalSupply_lte: BigInt
+  totalSupply_in: [BigInt!]
+  totalSupply_not_in: [BigInt!]
+  editionSize: BigInt
+  editionSize_not: BigInt
+  editionSize_gt: BigInt
+  editionSize_lt: BigInt
+  editionSize_gte: BigInt
+  editionSize_lte: BigInt
+  editionSize_in: [BigInt!]
+  editionSize_not_in: [BigInt!]
+  purchased: [String!]
+  purchased_not: [String!]
+  purchased_contains: [String!]
+  purchased_not_contains: [String!]
+  address: String
+  address_not: String
+  address_gt: String
+  address_lt: String
+  address_gte: String
+  address_lte: String
+  address_in: [String!]
+  address_not_in: [String!]
+  address_contains: String
+  address_not_contains: String
+  address_starts_with: String
+  address_not_starts_with: String
+  address_ends_with: String
+  address_not_ends_with: String
+  imageURL: String
+  imageURL_not: String
+  imageURL_gt: String
+  imageURL_lt: String
+  imageURL_gte: String
+  imageURL_lte: String
+  imageURL_in: [String!]
+  imageURL_not_in: [String!]
+  imageURL_contains: String
+  imageURL_not_contains: String
+  imageURL_starts_with: String
+  imageURL_not_starts_with: String
+  imageURL_ends_with: String
+  imageURL_not_ends_with: String
+  imageHash: Bytes
+  imageHash_not: Bytes
+  imageHash_in: [Bytes!]
+  imageHash_not_in: [Bytes!]
+  imageHash_contains: Bytes
+  imageHash_not_contains: Bytes
+  animationURL: String
+  animationURL_not: String
+  animationURL_gt: String
+  animationURL_lt: String
+  animationURL_gte: String
+  animationURL_lte: String
+  animationURL_in: [String!]
+  animationURL_not_in: [String!]
+  animationURL_contains: String
+  animationURL_not_contains: String
+  animationURL_starts_with: String
+  animationURL_not_starts_with: String
+  animationURL_ends_with: String
+  animationURL_not_ends_with: String
+  animationHash: Bytes
+  animationHash_not: Bytes
+  animationHash_in: [Bytes!]
+  animationHash_not_in: [Bytes!]
+  animationHash_contains: Bytes
+  animationHash_not_contains: Bytes
+}
+
+enum Edition_orderBy {
+  id
+  owner
+  name
+  description
+  salePrice
+  totalSupply
+  editionSize
+  purchased
+  address
+  imageURL
+  imageHash
+  animationURL
+  animationHash
+}
+
+enum OrderDirection {
+  asc
+  desc
+}
+
+type Purchase {
+  id: ID!
+  address: String!
+  price: BigInt
+  purchasedAtTimestamp: Int
+}
+
+input Purchase_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  address: String
+  address_not: String
+  address_gt: String
+  address_lt: String
+  address_gte: String
+  address_lte: String
+  address_in: [String!]
+  address_not_in: [String!]
+  address_contains: String
+  address_not_contains: String
+  address_starts_with: String
+  address_not_starts_with: String
+  address_ends_with: String
+  address_not_ends_with: String
+  price: BigInt
+  price_not: BigInt
+  price_gt: BigInt
+  price_lt: BigInt
+  price_gte: BigInt
+  price_lte: BigInt
+  price_in: [BigInt!]
+  price_not_in: [BigInt!]
+  purchasedAtTimestamp: Int
+  purchasedAtTimestamp_not: Int
+  purchasedAtTimestamp_gt: Int
+  purchasedAtTimestamp_lt: Int
+  purchasedAtTimestamp_gte: Int
+  purchasedAtTimestamp_lte: Int
+  purchasedAtTimestamp_in: [Int!]
+  purchasedAtTimestamp_not_in: [Int!]
+}
+
+enum Purchase_orderBy {
+  id
+  address
+  price
+  purchasedAtTimestamp
+}
+
+type Query {
+  edition(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: _SubgraphErrorPolicy_! = deny
+  ): Edition
+  editions(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: Edition_orderBy
+    orderDirection: OrderDirection
+    where: Edition_filter
+
+    """
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: _SubgraphErrorPolicy_! = deny
+  ): [Edition!]!
+  purchase(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: _SubgraphErrorPolicy_! = deny
+  ): Purchase
+  purchases(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: Purchase_orderBy
+    orderDirection: OrderDirection
+    where: Purchase_filter
+
+    """
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: _SubgraphErrorPolicy_! = deny
+  ): [Purchase!]!
+
+  """Access to subgraph metadata"""
+  _meta(block: Block_height): _Meta_
+}
+
+type Subscription {
+  edition(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: _SubgraphErrorPolicy_! = deny
+  ): Edition
+  editions(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: Edition_orderBy
+    orderDirection: OrderDirection
+    where: Edition_filter
+
+    """
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: _SubgraphErrorPolicy_! = deny
+  ): [Edition!]!
+  purchase(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: _SubgraphErrorPolicy_! = deny
+  ): Purchase
+  purchases(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: Purchase_orderBy
+    orderDirection: OrderDirection
+    where: Purchase_filter
+
+    """
+    The block at which the query should be executed. Can either be a `{ hash:
+    Bytes }` value containing a block hash, a `{ number: Int }` containing the
+    block number, or a `{ number_gte: Int }` containing the minimum block
+    number. In the case of `number_gte`, the query will be executed on the
+    latest block only if the subgraph has progressed to or past the minimum
+    block number. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: _SubgraphErrorPolicy_! = deny
+  ): [Purchase!]!
+
+  """Access to subgraph metadata"""
+  _meta(block: Block_height): _Meta_
+}
+
