@@ -406,14 +406,14 @@ export type EditionPartialFragment = (
   )> }
 );
 
-export type GetEditionsQueryVariables = Exact<{
+export type GetEditionQueryVariables = Exact<{
   addresses?: Maybe<Array<Scalars['String']> | Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
 }>;
 
 
-export type GetEditionsQuery = (
+export type GetEditionQuery = (
   { __typename?: 'Query' }
   & { editions: Array<(
     { __typename?: 'Edition' }

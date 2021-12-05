@@ -1,6 +1,6 @@
 import { gql } from 'graphql-request';
 
-export const EDITIONS_BY_ADDRESSES = gql`
+export const EDITION_BY_ADDRESS = gql`
   fragment EditionPartial on Edition {
     id
     address
@@ -19,8 +19,8 @@ export const EDITIONS_BY_ADDRESSES = gql`
     animationURL
     animationHash
   }
-  query getEditions($addresses: [String!], $first: Int, $skip: Int) {
-    editions(where: { address_in: $addresses }, first: $first, skip: $skip) {
+  query getEdition($address: [String!], $first: Int, $skip: Int) {
+    editions(where: $address, first: $first, skip: $skip) {
       id
       address
       owner

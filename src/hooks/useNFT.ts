@@ -6,6 +6,7 @@ import { useOpenseaNFT } from './useOpenseaNFT';
 import { ZORA_MEDIA_CONTRACT_BY_NETWORK } from '../constants/addresses';
 import { useZNFT } from './useZNFT';
 import { useNFTIndexer } from './useNFTIndexer';
+import { useEdition } from './useEdition';
 
 export type useNFTType = {
   currencyLoaded: boolean;
@@ -18,6 +19,7 @@ type OptionsType = {
   initialData?: any;
   loadCurrencyInfo?: boolean;
   useBetaIndexer?: boolean;
+  edition?: boolean;
 };
 
 /**
@@ -42,24 +44,34 @@ export function useNFT(
   const isZoraContractAddress =
     contractAddress === ZORA_MEDIA_CONTRACT_BY_NETWORK[fetcher.networkId];
 
+  const edition = useEdition(options.edition ? contractAddress : undefined);
+
   const openseaNFT = useOpenseaNFT(
-    !options.useBetaIndexer && !isZoraContractAddress ? contractAddress : undefined,
-    !options.useBetaIndexer && !isZoraContractAddress ? tokenId : undefined,
+    !options.edition && !options.useBetaIndexer && !isZoraContractAddress
+      ? contractAddress
+      : undefined,
+    !options.edition && !options.useBetaIndexer && !isZoraContractAddress
+      ? tokenId
+      : undefined,
     options
   );
 
   const betaIndexerNFT = useNFTIndexer(
-    options.useBetaIndexer ? contractAddress : undefined,
-    options.useBetaIndexer ? tokenId : undefined,
+    !options.edition && options.useBetaIndexer ? contractAddress : undefined,
+    !options.edition && options.useBetaIndexer ? tokenId : undefined,
     options
   );
 
   const zoraNFT = useZNFT(
-    !options.useBetaIndexer && isZoraContractAddress ? tokenId : undefined,
+    !options.edition && !options.useBetaIndexer && isZoraContractAddress
+      ? tokenId
+      : undefined,
     options
   );
 
-  let data = options.useBetaIndexer
+  let data = options.edition
+    ? edition
+    : options.useBetaIndexer
     ? betaIndexerNFT
     : isZoraContractAddress
     ? zoraNFT
