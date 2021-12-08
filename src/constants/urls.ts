@@ -30,6 +30,7 @@ export const OPENSEA_API_URL_BY_NETWORK = {
 };
 
 export const EDITIONS_GRAPH_URL_BY_NETWORK = {
+  [Networks.MAINNET]: 'https://api.thegraph.com/subgraphs/name/neokry/zora-editions',
   [Networks.RINKEBY]: 'https://api.thegraph.com/subgraphs/name/neokry/zora-editions',
 };
 

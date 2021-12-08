@@ -14,13 +14,13 @@ export enum AuctionStateInfo {
 
 export function getAuctionState(pricing: PricingInfoData): AuctionStateInfo {
   if (pricing.auctionType === AuctionType.PERPETUAL) {
-    if (pricing.perpetual.ask) {
+    if (pricing.perpetual?.ask) {
       return AuctionStateInfo.PERPETUAL_ASK;
     }
-    if (!pricing.perpetual.highestBid && pricing.reserve?.previousBids.length) {
+    if (!pricing.perpetual?.highestBid && pricing.reserve?.previousBids.length) {
       return AuctionStateInfo.RESERVE_AUCTION_FINISHED;
     }
-    if (pricing.perpetual.highestBid) {
+    if (pricing.perpetual?.highestBid) {
       return AuctionStateInfo.PERPETUAL_BID;
     }
     return AuctionStateInfo.NO_PRICING;

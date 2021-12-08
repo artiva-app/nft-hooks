@@ -2,7 +2,7 @@ import { getAddress } from '@ethersproject/address';
 
 import { ZORA_MEDIA_CONTRACT_BY_NETWORK } from '../constants/addresses';
 import { IndexerTokenWithAuctionFragment } from '../graph-queries/zora-indexer-types';
-import { FetchGroupTypes } from './FetchResultTypes';
+import { FetchGroupTypes, NFTResultType } from './FetchResultTypes';
 import { MediaFetchAgent } from './MediaFetchAgent';
 import { openseaDataToMetadata } from './OpenseaUtils';
 import { addAuctionInformation } from './TransformFetchResults';
@@ -65,7 +65,8 @@ export const fetchNFTData = async ({
     return response;
   } else {
     const nft = await fetchAgent.loadZNFTData(tokenId);
-    const metadata = await fetchAgent.fetchIPFSMetadata(nft.nft.metadataURI);
+    const result = nft.nft as NFTResultType;
+    const metadata = await fetchAgent.fetchIPFSMetadata(result.metadataURI);
     const response = {
       nft,
       metadata,

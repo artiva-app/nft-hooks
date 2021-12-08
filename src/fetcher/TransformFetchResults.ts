@@ -19,6 +19,7 @@ import {
   CurrencyLookupType,
   ZNFTMediaDataType,
   PricingInfoData,
+  PricingInfo,
 } from './AuctionInfoTypes';
 import { AuctionStateInfo, getAuctionState } from './AuctionState';
 import { ZORA_MEDIA_CONTRACT_BY_NETWORK } from '../constants/addresses';
@@ -108,6 +109,19 @@ export function auctionDataToPricing(
   return {
     ...auctionData,
     auctionCurrency: transformCurrencyEth(auctionData.auctionCurrency),
+  };
+}
+
+export function transformEditionsCurrency(salePrice: string): PricingInfo {
+  return {
+    currency: {
+      id: '0x1',
+      name: 'Ether',
+      symbol: 'ETH',
+      decimals: 18,
+    },
+    prettyAmount: setCurrencyDecimal(salePrice, 18),
+    amount: salePrice,
   };
 }
 

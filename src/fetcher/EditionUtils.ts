@@ -1,27 +1,29 @@
-import { EditionPartialFragment } from 'src/graph-queries/editions-graph-types';
+import { EditionPartialFragment } from '../graph-queries/editions-graph-types';
 
 export type EditionNFTDataType = {
   nft: {
+    tokenId: string | null;
     contract: {
       address: string;
     };
-    owner: {
-      address: string;
-    };
-  };
-  pricing: {
-    salePrice: any;
-    totalSupply: any;
-    editionSize: any;
+    metadataURI: string;
+    owner: string;
+    creator: string;
+    name: string;
+    description?: string;
+    imageURL?: string;
+    imageHash: string;
+    animationURL?: string;
+    animationHash?: string;
   };
 };
 
-export const editionDataToMetadata = (response: EditionPartialFragment) => {
+export const editionDataToMetadata = (response: EditionNFTDataType) => {
   return {
-    name: response.name,
-    description: response.description,
-    image: response.imageURL,
-    animation_url: response.animationURL,
+    name: response.nft.name,
+    description: response.nft.description,
+    image: response.nft.imageURL,
+    animation_url: response.nft.animationURL,
   };
 };
 
@@ -33,14 +35,23 @@ export const transformEditionResponse = (
       contract: {
         address: data.address,
       },
-      owner: {
-        address: data.owner,
-      },
-    },
-    pricing: {
-      salePrice: data.salePrice,
-      totalSupply: data.totalSupply,
-      editionSize: data.editionSize,
+      tokenId: null,
+      metadataURI: btoa(
+        JSON.stringify({
+          name: data.name,
+          description: data.description,
+          image: data.imageURL,
+          animation_url: data.animationURL,
+        })
+      ),
+      owner: data.owner,
+      creator: data.creator,
+      name: data.name,
+      description: data.description ?? undefined,
+      imageURL: data.imageURL ?? undefined,
+      imageHash: data.imageHash,
+      animationURL: data.animationURL ?? undefined,
+      animationHash: data.animationHash,
     },
   };
 };

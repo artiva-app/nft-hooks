@@ -66,8 +66,11 @@ import {
 } from '../graph-queries/ens-graph-types';
 import { ArgumentsError, NotFoundError } from './ErrorUtils';
 import { convertURIToHTTPS } from './UriUtils';
-import { EDITION_BY_ADDRESS } from 'src/graph-queries/editions-graph';
-import { GetEditionQuery } from 'src/graph-queries/editions-graph-types';
+import { EDITION_BY_ADDRESS } from '../graph-queries/editions-graph';
+import {
+  GetEditionQuery,
+  GetEditionQueryVariables,
+} from '../graph-queries/editions-graph-types';
 
 /**
  * Internal agent for NFT Hooks to fetch NFT information.
@@ -458,11 +461,16 @@ export class MediaFetchAgent {
       fetch: fetchWithTimeout.fetch,
     });
     let query = EDITION_BY_ADDRESS;
-    const response = (await client.request(query, {
+
+    const variables: GetEditionQueryVariables = {
       address: address,
       first: first,
       skip: skip,
-    })) as GetEditionQuery;
+    };
+    const response = (await client.request(query, variables)) as GetEditionQuery;
+
+    console.log('response', response);
+
     return response.editions;
   }
 

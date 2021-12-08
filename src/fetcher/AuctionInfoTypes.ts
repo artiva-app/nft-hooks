@@ -49,6 +49,7 @@ export enum AuctionType {
   NONE = 'NONE',
   PERPETUAL = 'PERPETUAL',
   RESERVE = 'RESERVE',
+  EDITION = 'EDITION',
 }
 
 export type CommonNFTMediaDataType = {
@@ -84,8 +85,13 @@ export type HighestBidType = {
 };
 
 export type PricingInfoData = {
-  status: AuctionStateInfo;
-  perpetual: {
+  status?: AuctionStateInfo;
+  edition?: {
+    salePrice: PricingInfo;
+    totalSupply: number;
+    editionSize: number;
+  };
+  perpetual?: {
     bids: PerpetualBid[];
     ask?: PerpetualAsk;
     highestBid?: HighestBidType;
@@ -117,10 +123,16 @@ export type IndexerDataType = Omit<CommonNFTMediaDataType, 'pricing'> & {
   pricing: PricingInfoData;
 };
 
+export type EditionDataType = Omit<EditionNFTDataType, 'pricing'> & {
+  pricing: PricingInfoData;
+};
+
 export type NFTDataType =
   | ZNFTDataType
   | OpenseaNFTDataType
   | IndexerDataType
-  | EditionNFTDataType;
+  | EditionDataType;
+
+export type NFTWithPricingType = ZNFTDataType | OpenseaNFTDataType | IndexerDataType;
 
 export type CurrencyLookupType = { [currencyId: string]: ChainCurrencyType };

@@ -5,6 +5,7 @@ export const EDITION_BY_ADDRESS = gql`
     id
     address
     owner
+    creator
     name
     description
     totalSupply
@@ -19,24 +20,13 @@ export const EDITION_BY_ADDRESS = gql`
     animationURL
     animationHash
   }
-  query getEdition($address: [String!], $first: Int, $skip: Int) {
-    editions(where: $address, first: $first, skip: $skip) {
-      id
-      address
-      owner
-      name
-      description
-      totalSupply
-      editionSize
-      purchased {
-        address
-        purchasedAtTimestamp
-      }
-      salePrice
-      imageURL
-      imageHash
-      animationURL
-      animationHash
+  query getEdition(
+    $address: String! = "0xc31b85030ebb76fba48a764c11532050eb4bdb54"
+    $first: Int
+    $skip: Int
+  ) {
+    editions(where: { address: $address }, first: $first, skip: $skip) {
+      ...EditionPartial
     }
   }
 `;

@@ -55,6 +55,7 @@ scalar Bytes
 type Edition {
   id: ID!
   owner: String!
+  creator: String!
   name: String!
   description: String
   salePrice: BigInt
@@ -91,6 +92,20 @@ input Edition_filter {
   owner_not_starts_with: String
   owner_ends_with: String
   owner_not_ends_with: String
+  creator: String
+  creator_not: String
+  creator_gt: String
+  creator_lt: String
+  creator_gte: String
+  creator_lte: String
+  creator_in: [String!]
+  creator_not_in: [String!]
+  creator_contains: String
+  creator_not_contains: String
+  creator_starts_with: String
+  creator_not_starts_with: String
+  creator_ends_with: String
+  creator_not_ends_with: String
   name: String
   name_not: String
   name_gt: String
@@ -206,6 +221,7 @@ input Edition_filter {
 enum Edition_orderBy {
   id
   owner
+  creator
   name
   description
   salePrice

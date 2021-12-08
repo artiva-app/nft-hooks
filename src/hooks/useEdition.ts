@@ -3,13 +3,19 @@ import useSWR, { SWRConfiguration } from 'swr';
 
 import { NFTFetchContext } from '../context/NFTFetchContext';
 import { onErrorRetry } from '../fetcher/ErrorUtils';
-import { EditionPartialFragment } from 'src/graph-queries/editions-graph-types';
-import { EditionNFTDataType, transformEditionResponse } from 'src/fetcher/EditionUtils';
+import { EditionPartialFragment } from '../graph-queries/editions-graph-types';
+import { transformEditionResponse } from '../fetcher/EditionUtils';
+import {
+  AuctionType,
+  EditionDataType,
+  PricingInfoData,
+} from '../fetcher/AuctionInfoTypes';
+import { transformEditionsCurrency } from '../fetcher/TransformFetchResults';
 
 export type useEditionType = {
   currencyLoaded: boolean;
   error?: string;
-  data?: EditionNFTDataType;
+  data?: EditionDataType;
 };
 
 /**
@@ -25,19 +31,32 @@ export function useEdition(
 ): useEditionType {
   options.onErrorRetry = onErrorRetry;
   const fetcher = useContext(NFTFetchContext);
-  const queryKey = JSON.stringify({ address: address ?? null });
+  const { refreshInterval } = options || {};
+
   const res = useSWR<EditionPartialFragment[]>(
-    queryKey,
-    async (query: string) => {
-      const { address } = JSON.parse(query);
-      return await fetcher.fetchEdition(address.toLowerCase());
-    },
-    options
+    address ? ['fetchEdition', address.toLowerCase()] : null,
+    (_, address) => fetcher.fetchEdition(address),
+    { refreshInterval, dedupingInterval: 0 }
   );
+
+  console.log('Res', res.error);
 
   let data = undefined;
   if (res.data && res.data.length) {
+    const pricing: PricingInfoData = {
+      edition: {
+        salePrice: transformEditionsCurrency(res.data[0].salePrice ?? 0),
+        totalSupply: res.data[0].totalSupply,
+        editionSize: res.data[0].editionSize,
+      },
+      auctionType: AuctionType.EDITION,
+    };
+
     data = transformEditionResponse(res.data[0]);
+    data = {
+      ...data,
+      pricing,
+    };
   }
 
   return {

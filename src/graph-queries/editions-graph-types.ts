@@ -30,6 +30,7 @@ export type Edition = {
   __typename?: 'Edition';
   id: Scalars['ID'];
   owner: Scalars['String'];
+  creator: Scalars['String'];
   name: Scalars['String'];
   description?: Maybe<Scalars['String']>;
   salePrice?: Maybe<Scalars['BigInt']>;
@@ -75,6 +76,20 @@ export type Edition_Filter = {
   owner_not_starts_with?: Maybe<Scalars['String']>;
   owner_ends_with?: Maybe<Scalars['String']>;
   owner_not_ends_with?: Maybe<Scalars['String']>;
+  creator?: Maybe<Scalars['String']>;
+  creator_not?: Maybe<Scalars['String']>;
+  creator_gt?: Maybe<Scalars['String']>;
+  creator_lt?: Maybe<Scalars['String']>;
+  creator_gte?: Maybe<Scalars['String']>;
+  creator_lte?: Maybe<Scalars['String']>;
+  creator_in?: Maybe<Array<Scalars['String']>>;
+  creator_not_in?: Maybe<Array<Scalars['String']>>;
+  creator_contains?: Maybe<Scalars['String']>;
+  creator_not_contains?: Maybe<Scalars['String']>;
+  creator_starts_with?: Maybe<Scalars['String']>;
+  creator_not_starts_with?: Maybe<Scalars['String']>;
+  creator_ends_with?: Maybe<Scalars['String']>;
+  creator_not_ends_with?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   name_not?: Maybe<Scalars['String']>;
   name_gt?: Maybe<Scalars['String']>;
@@ -190,6 +205,7 @@ export type Edition_Filter = {
 export enum Edition_OrderBy {
   Id = 'id',
   Owner = 'owner',
+  Creator = 'creator',
   Name = 'name',
   Description = 'description',
   SalePrice = 'salePrice',
@@ -399,7 +415,7 @@ export enum _SubgraphErrorPolicy_ {
 
 export type EditionPartialFragment = (
   { __typename?: 'Edition' }
-  & Pick<Edition, 'id' | 'address' | 'owner' | 'name' | 'description' | 'totalSupply' | 'editionSize' | 'salePrice' | 'imageURL' | 'imageHash' | 'animationURL' | 'animationHash'>
+  & Pick<Edition, 'id' | 'address' | 'owner' | 'creator' | 'name' | 'description' | 'totalSupply' | 'editionSize' | 'salePrice' | 'imageURL' | 'imageHash' | 'animationURL' | 'animationHash'>
   & { purchased: Array<(
     { __typename?: 'Purchase' }
     & Pick<Purchase, 'address' | 'purchasedAtTimestamp'>
@@ -407,7 +423,7 @@ export type EditionPartialFragment = (
 );
 
 export type GetEditionQueryVariables = Exact<{
-  addresses?: Maybe<Array<Scalars['String']> | Scalars['String']>;
+  address?: Scalars['String'];
   first?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
 }>;
@@ -417,10 +433,6 @@ export type GetEditionQuery = (
   { __typename?: 'Query' }
   & { editions: Array<(
     { __typename?: 'Edition' }
-    & Pick<Edition, 'id' | 'address' | 'owner' | 'name' | 'description' | 'totalSupply' | 'editionSize' | 'salePrice' | 'imageURL' | 'imageHash' | 'animationURL' | 'animationHash'>
-    & { purchased: Array<(
-      { __typename?: 'Purchase' }
-      & Pick<Purchase, 'address' | 'purchasedAtTimestamp'>
-    )> }
+    & EditionPartialFragment
   )> }
 );

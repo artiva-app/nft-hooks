@@ -3,6 +3,7 @@ import { useNFT, useNFTType } from './hooks/useNFT';
 import { useZNFT, useZNFTType } from './hooks/useZNFT';
 import { useOpenseaNFT, useOpenseaNFTType } from './hooks/useOpenseaNFT';
 import { useNFTContent, useNFTContentType } from './hooks/useNFTContent';
+import { useEdition, useEditionType } from './hooks/useEdition';
 import { useENSAddress } from './hooks/useENSAddress';
 import { useNFTMetadata, useNFTMetadataType } from './hooks/useNFTMetadata';
 import { NFTFetchConfiguration } from './context/NFTFetchContext';
@@ -33,12 +34,14 @@ export {
   useOpenseaNFT,
   useZoraUsername,
   useENSAddress,
+  useEdition,
   // Hook types
   useNFTContentType,
   useNFTMetadataType,
   useNFTType,
   useOpenseaNFTType,
   useZNFTType,
+  useEditionType,
   // Types
   PricingInfo,
   // Configuration
