@@ -15,6 +15,7 @@ export type EditionNFTDataType = {
     imageHash: string;
     animationURL?: string;
     animationHash?: string;
+    balance?: any;
   };
 };
 
@@ -52,6 +53,7 @@ export const transformEditionResponse = (
       imageHash: data.imageHash,
       animationURL: data.animationURL ?? undefined,
       animationHash: data.animationHash,
+      balance: data.balance,
     },
   };
 };

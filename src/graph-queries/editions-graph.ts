@@ -19,6 +19,7 @@ export const EDITION_BY_ADDRESS = gql`
     imageHash
     animationURL
     animationHash
+    balance
   }
   query getEdition(
     $address: String! = "0xc31b85030ebb76fba48a764c11532050eb4bdb54"

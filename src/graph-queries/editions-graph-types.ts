@@ -33,14 +33,15 @@ export type Edition = {
   creator: Scalars['String'];
   name: Scalars['String'];
   description?: Maybe<Scalars['String']>;
-  salePrice?: Maybe<Scalars['BigInt']>;
+  salePrice: Scalars['BigInt'];
   totalSupply?: Maybe<Scalars['BigInt']>;
   editionSize: Scalars['BigInt'];
   purchased: Array<Purchase>;
+  balance: Scalars['BigInt'];
   address: Scalars['String'];
   imageURL?: Maybe<Scalars['String']>;
-  imageHash?: Maybe<Scalars['Bytes']>;
   animationURL?: Maybe<Scalars['String']>;
+  imageHash?: Maybe<Scalars['Bytes']>;
   animationHash?: Maybe<Scalars['Bytes']>;
 };
 
@@ -142,10 +143,14 @@ export type Edition_Filter = {
   editionSize_lte?: Maybe<Scalars['BigInt']>;
   editionSize_in?: Maybe<Array<Scalars['BigInt']>>;
   editionSize_not_in?: Maybe<Array<Scalars['BigInt']>>;
-  purchased?: Maybe<Array<Scalars['String']>>;
-  purchased_not?: Maybe<Array<Scalars['String']>>;
-  purchased_contains?: Maybe<Array<Scalars['String']>>;
-  purchased_not_contains?: Maybe<Array<Scalars['String']>>;
+  balance?: Maybe<Scalars['BigInt']>;
+  balance_not?: Maybe<Scalars['BigInt']>;
+  balance_gt?: Maybe<Scalars['BigInt']>;
+  balance_lt?: Maybe<Scalars['BigInt']>;
+  balance_gte?: Maybe<Scalars['BigInt']>;
+  balance_lte?: Maybe<Scalars['BigInt']>;
+  balance_in?: Maybe<Array<Scalars['BigInt']>>;
+  balance_not_in?: Maybe<Array<Scalars['BigInt']>>;
   address?: Maybe<Scalars['String']>;
   address_not?: Maybe<Scalars['String']>;
   address_gt?: Maybe<Scalars['String']>;
@@ -174,12 +179,6 @@ export type Edition_Filter = {
   imageURL_not_starts_with?: Maybe<Scalars['String']>;
   imageURL_ends_with?: Maybe<Scalars['String']>;
   imageURL_not_ends_with?: Maybe<Scalars['String']>;
-  imageHash?: Maybe<Scalars['Bytes']>;
-  imageHash_not?: Maybe<Scalars['Bytes']>;
-  imageHash_in?: Maybe<Array<Scalars['Bytes']>>;
-  imageHash_not_in?: Maybe<Array<Scalars['Bytes']>>;
-  imageHash_contains?: Maybe<Scalars['Bytes']>;
-  imageHash_not_contains?: Maybe<Scalars['Bytes']>;
   animationURL?: Maybe<Scalars['String']>;
   animationURL_not?: Maybe<Scalars['String']>;
   animationURL_gt?: Maybe<Scalars['String']>;
@@ -194,6 +193,12 @@ export type Edition_Filter = {
   animationURL_not_starts_with?: Maybe<Scalars['String']>;
   animationURL_ends_with?: Maybe<Scalars['String']>;
   animationURL_not_ends_with?: Maybe<Scalars['String']>;
+  imageHash?: Maybe<Scalars['Bytes']>;
+  imageHash_not?: Maybe<Scalars['Bytes']>;
+  imageHash_in?: Maybe<Array<Scalars['Bytes']>>;
+  imageHash_not_in?: Maybe<Array<Scalars['Bytes']>>;
+  imageHash_contains?: Maybe<Scalars['Bytes']>;
+  imageHash_not_contains?: Maybe<Scalars['Bytes']>;
   animationHash?: Maybe<Scalars['Bytes']>;
   animationHash_not?: Maybe<Scalars['Bytes']>;
   animationHash_in?: Maybe<Array<Scalars['Bytes']>>;
@@ -212,10 +217,11 @@ export enum Edition_OrderBy {
   TotalSupply = 'totalSupply',
   EditionSize = 'editionSize',
   Purchased = 'purchased',
+  Balance = 'balance',
   Address = 'address',
   ImageUrl = 'imageURL',
-  ImageHash = 'imageHash',
   AnimationUrl = 'animationURL',
+  ImageHash = 'imageHash',
   AnimationHash = 'animationHash'
 }
 
@@ -229,7 +235,8 @@ export type Purchase = {
   id: Scalars['ID'];
   address: Scalars['String'];
   price?: Maybe<Scalars['BigInt']>;
-  purchasedAtTimestamp?: Maybe<Scalars['Int']>;
+  purchasedAtTimestamp: Scalars['BigInt'];
+  edition: Edition;
 };
 
 export type Purchase_Filter = {
@@ -263,21 +270,36 @@ export type Purchase_Filter = {
   price_lte?: Maybe<Scalars['BigInt']>;
   price_in?: Maybe<Array<Scalars['BigInt']>>;
   price_not_in?: Maybe<Array<Scalars['BigInt']>>;
-  purchasedAtTimestamp?: Maybe<Scalars['Int']>;
-  purchasedAtTimestamp_not?: Maybe<Scalars['Int']>;
-  purchasedAtTimestamp_gt?: Maybe<Scalars['Int']>;
-  purchasedAtTimestamp_lt?: Maybe<Scalars['Int']>;
-  purchasedAtTimestamp_gte?: Maybe<Scalars['Int']>;
-  purchasedAtTimestamp_lte?: Maybe<Scalars['Int']>;
-  purchasedAtTimestamp_in?: Maybe<Array<Scalars['Int']>>;
-  purchasedAtTimestamp_not_in?: Maybe<Array<Scalars['Int']>>;
+  purchasedAtTimestamp?: Maybe<Scalars['BigInt']>;
+  purchasedAtTimestamp_not?: Maybe<Scalars['BigInt']>;
+  purchasedAtTimestamp_gt?: Maybe<Scalars['BigInt']>;
+  purchasedAtTimestamp_lt?: Maybe<Scalars['BigInt']>;
+  purchasedAtTimestamp_gte?: Maybe<Scalars['BigInt']>;
+  purchasedAtTimestamp_lte?: Maybe<Scalars['BigInt']>;
+  purchasedAtTimestamp_in?: Maybe<Array<Scalars['BigInt']>>;
+  purchasedAtTimestamp_not_in?: Maybe<Array<Scalars['BigInt']>>;
+  edition?: Maybe<Scalars['String']>;
+  edition_not?: Maybe<Scalars['String']>;
+  edition_gt?: Maybe<Scalars['String']>;
+  edition_lt?: Maybe<Scalars['String']>;
+  edition_gte?: Maybe<Scalars['String']>;
+  edition_lte?: Maybe<Scalars['String']>;
+  edition_in?: Maybe<Array<Scalars['String']>>;
+  edition_not_in?: Maybe<Array<Scalars['String']>>;
+  edition_contains?: Maybe<Scalars['String']>;
+  edition_not_contains?: Maybe<Scalars['String']>;
+  edition_starts_with?: Maybe<Scalars['String']>;
+  edition_not_starts_with?: Maybe<Scalars['String']>;
+  edition_ends_with?: Maybe<Scalars['String']>;
+  edition_not_ends_with?: Maybe<Scalars['String']>;
 };
 
 export enum Purchase_OrderBy {
   Id = 'id',
   Address = 'address',
   Price = 'price',
-  PurchasedAtTimestamp = 'purchasedAtTimestamp'
+  PurchasedAtTimestamp = 'purchasedAtTimestamp',
+  Edition = 'edition'
 }
 
 export type Query = {
@@ -415,7 +437,7 @@ export enum _SubgraphErrorPolicy_ {
 
 export type EditionPartialFragment = (
   { __typename?: 'Edition' }
-  & Pick<Edition, 'id' | 'address' | 'owner' | 'creator' | 'name' | 'description' | 'totalSupply' | 'editionSize' | 'salePrice' | 'imageURL' | 'imageHash' | 'animationURL' | 'animationHash'>
+  & Pick<Edition, 'id' | 'address' | 'owner' | 'creator' | 'name' | 'description' | 'totalSupply' | 'editionSize' | 'salePrice' | 'imageURL' | 'imageHash' | 'animationURL' | 'animationHash' | 'balance'>
   & { purchased: Array<(
     { __typename?: 'Purchase' }
     & Pick<Purchase, 'address' | 'purchasedAtTimestamp'>

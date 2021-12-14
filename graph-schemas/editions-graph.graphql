@@ -58,14 +58,15 @@ type Edition {
   creator: String!
   name: String!
   description: String
-  salePrice: BigInt
+  salePrice: BigInt!
   totalSupply: BigInt
   editionSize: BigInt!
   purchased(skip: Int = 0, first: Int = 100, orderBy: Purchase_orderBy, orderDirection: OrderDirection, where: Purchase_filter): [Purchase!]!
+  balance: BigInt!
   address: String!
   imageURL: String
-  imageHash: Bytes
   animationURL: String
+  imageHash: Bytes
   animationHash: Bytes
 }
 
@@ -158,10 +159,14 @@ input Edition_filter {
   editionSize_lte: BigInt
   editionSize_in: [BigInt!]
   editionSize_not_in: [BigInt!]
-  purchased: [String!]
-  purchased_not: [String!]
-  purchased_contains: [String!]
-  purchased_not_contains: [String!]
+  balance: BigInt
+  balance_not: BigInt
+  balance_gt: BigInt
+  balance_lt: BigInt
+  balance_gte: BigInt
+  balance_lte: BigInt
+  balance_in: [BigInt!]
+  balance_not_in: [BigInt!]
   address: String
   address_not: String
   address_gt: String
@@ -190,12 +195,6 @@ input Edition_filter {
   imageURL_not_starts_with: String
   imageURL_ends_with: String
   imageURL_not_ends_with: String
-  imageHash: Bytes
-  imageHash_not: Bytes
-  imageHash_in: [Bytes!]
-  imageHash_not_in: [Bytes!]
-  imageHash_contains: Bytes
-  imageHash_not_contains: Bytes
   animationURL: String
   animationURL_not: String
   animationURL_gt: String
@@ -210,6 +209,12 @@ input Edition_filter {
   animationURL_not_starts_with: String
   animationURL_ends_with: String
   animationURL_not_ends_with: String
+  imageHash: Bytes
+  imageHash_not: Bytes
+  imageHash_in: [Bytes!]
+  imageHash_not_in: [Bytes!]
+  imageHash_contains: Bytes
+  imageHash_not_contains: Bytes
   animationHash: Bytes
   animationHash_not: Bytes
   animationHash_in: [Bytes!]
@@ -228,10 +233,11 @@ enum Edition_orderBy {
   totalSupply
   editionSize
   purchased
+  balance
   address
   imageURL
-  imageHash
   animationURL
+  imageHash
   animationHash
 }
 
@@ -244,7 +250,8 @@ type Purchase {
   id: ID!
   address: String!
   price: BigInt
-  purchasedAtTimestamp: Int
+  purchasedAtTimestamp: BigInt!
+  edition: Edition!
 }
 
 input Purchase_filter {
@@ -278,14 +285,28 @@ input Purchase_filter {
   price_lte: BigInt
   price_in: [BigInt!]
   price_not_in: [BigInt!]
-  purchasedAtTimestamp: Int
-  purchasedAtTimestamp_not: Int
-  purchasedAtTimestamp_gt: Int
-  purchasedAtTimestamp_lt: Int
-  purchasedAtTimestamp_gte: Int
-  purchasedAtTimestamp_lte: Int
-  purchasedAtTimestamp_in: [Int!]
-  purchasedAtTimestamp_not_in: [Int!]
+  purchasedAtTimestamp: BigInt
+  purchasedAtTimestamp_not: BigInt
+  purchasedAtTimestamp_gt: BigInt
+  purchasedAtTimestamp_lt: BigInt
+  purchasedAtTimestamp_gte: BigInt
+  purchasedAtTimestamp_lte: BigInt
+  purchasedAtTimestamp_in: [BigInt!]
+  purchasedAtTimestamp_not_in: [BigInt!]
+  edition: String
+  edition_not: String
+  edition_gt: String
+  edition_lt: String
+  edition_gte: String
+  edition_lte: String
+  edition_in: [String!]
+  edition_not_in: [String!]
+  edition_contains: String
+  edition_not_contains: String
+  edition_starts_with: String
+  edition_not_starts_with: String
+  edition_ends_with: String
+  edition_not_ends_with: String
 }
 
 enum Purchase_orderBy {
@@ -293,6 +314,7 @@ enum Purchase_orderBy {
   address
   price
   purchasedAtTimestamp
+  edition
 }
 
 type Query {
