@@ -35,12 +35,14 @@ export function useOpenseaNFT(
 
   const nftData = useSWR(
     contractAddress && tokenId ? ['loadGenericNFT', contractAddress, tokenId] : null,
-    (_, contractAddress, tokenId) => fetcher.loadNFTDataUntransformed(contractAddress, tokenId),
+    (_, contractAddress, tokenId) =>
+      fetcher.loadNFTDataUntransformed(contractAddress, tokenId),
     { dedupingInterval: 0 }
   );
   const auctionData = useSWR(
     contractAddress && tokenId ? ['loadAuctionForNFT', contractAddress, tokenId] : null,
-    async (_, contractAddress, tokenId) => fetcher.loadAuctionInfo(contractAddress, tokenId)
+    async (_, contractAddress, tokenId) =>
+      fetcher.loadAuctionInfo(contractAddress, tokenId)
   );
 
   const nftResponseData = nftData.data as any;
@@ -59,8 +61,9 @@ export function useOpenseaNFT(
   if (nftData.data !== undefined) {
     data = transformOpenseaResponse(
       nftData.data,
+      fetcher.networkId,
       auctionData.data,
-      currencyData.data,
+      currencyData.data
     );
   } else {
     data = initialData;

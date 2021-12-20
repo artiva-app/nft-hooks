@@ -39,7 +39,9 @@ export function useZNFT(id?: string, options: OptionsType = {}): useZNFTType {
     nftData.data && nftData.data.pricing && loadCurrencyInfo
       ? [
           'loadCurrencies',
-          ...getCurrenciesInUse(addAuctionInformation(nftData.data.pricing)),
+          ...getCurrenciesInUse(
+            addAuctionInformation(nftData.data.pricing, undefined, fetcher.networkId)
+          ),
         ]
       : null,
     (_, ...currencies) => fetcher.loadCurrencies(currencies),
@@ -53,7 +55,11 @@ export function useZNFT(id?: string, options: OptionsType = {}): useZNFTType {
   if (nftData.data !== undefined) {
     data = {
       ...nftData.data,
-      pricing: addAuctionInformation(nftData.data.pricing, currencyData.data),
+      pricing: addAuctionInformation(
+        nftData.data.pricing,
+        currencyData.data,
+        fetcher.networkId
+      ),
     };
   } else {
     data = initialData;

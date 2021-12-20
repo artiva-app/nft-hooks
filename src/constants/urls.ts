@@ -30,8 +30,13 @@ export const OPENSEA_API_URL_BY_NETWORK = {
 };
 
 export const EDITIONS_GRAPH_URL_BY_NETWORK = {
-  [Networks.MAINNET]: 'https://api.thegraph.com/subgraphs/name/neokry/zora-editions',
-  [Networks.RINKEBY]: 'https://api.thegraph.com/subgraphs/name/neokry/zora-editions',
+  [Networks.MAINNET]:
+    'https://api.thegraph.com/subgraphs/name/neokry/nft-editions-rinkeby',
+  [Networks.RINKEBY]:
+    'https://api.thegraph.com/subgraphs/name/neokry/nft-editions-mainnet',
+  [Networks.POLYGON]:
+    'https://api.thegraph.com/subgraphs/name/neokry/nft-editions-polygon',
+  [Networks.MUMBAI]: 'https://api.thegraph.com/subgraphs/name/neokry/nft-editions-mumbai',
 };
 
 export const ZORA_USERNAME_API_URL = 'https://zora.co/api/users';

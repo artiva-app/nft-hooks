@@ -390,13 +390,14 @@ export class MediaFetchAgent {
     }
     return {
       ...chainInfo,
-      pricing: addAuctionInformation(chainInfo.pricing, currencyInfos),
+      pricing: addAuctionInformation(chainInfo.pricing, currencyInfos, this.networkId),
     };
   }
 
   async loadNFTData(
     contractAddress: string,
     tokenId: string,
+    networkId: NetworkIDs,
     auctionData?: ReserveAuctionPartialFragment,
     currencyData?: CurrencyLookupType
   ) {
@@ -415,7 +416,7 @@ export class MediaFetchAgent {
     if (!nftInfo) {
       throw new RequestError('Cannot fetch NFT information');
     }
-    return transformOpenseaResponse(nftInfo, auctionData, currencyData);
+    return transformOpenseaResponse(nftInfo, networkId, auctionData, currencyData);
   }
 
   async loadNFTDataUntransformed(contractAddress: string, tokenId: string) {

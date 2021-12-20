@@ -44,7 +44,11 @@ export function useZNFTGroup(
       ? [
           'loadCurrencies',
           ...nftData.data
-            .map((item) => getCurrenciesInUse(addAuctionInformation(item.pricing)))
+            .map((item) =>
+              getCurrenciesInUse(
+                addAuctionInformation(item.pricing, undefined, fetcher.networkId)
+              )
+            )
             .reduce((last, item) => last.concat(item), []),
         ]
       : null,
@@ -59,7 +63,7 @@ export function useZNFTGroup(
   if (nftData.data !== undefined) {
     medias = nftData.data.map((media) => ({
       ...media,
-      pricing: addAuctionInformation(media.pricing, currencyData.data),
+      pricing: addAuctionInformation(media.pricing, currencyData.data, fetcher.networkId),
     }));
   } else {
     medias = initialData;

@@ -1,3 +1,4 @@
+import { NetworkIDs } from '../constants/networks';
 import { ReserveAuctionPartialFragment } from '../graph-queries/zora-graph-types';
 import { CurrencyLookupType, OpenseaNFTDataType } from './AuctionInfoTypes';
 import { RequestError } from './RequestError';
@@ -41,6 +42,7 @@ export const openseaDataToMetadata = (response: OpenseaNFTDataType) => {
 
 export const transformOpenseaResponse = (
   data: OpenseaResponse,
+  networkId: NetworkIDs,
   auctionData?: ReserveAuctionPartialFragment,
   currencyData?: CurrencyLookupType
 ): OpenseaNFTDataType => {
@@ -57,9 +59,10 @@ export const transformOpenseaResponse = (
     openseaInfo: data,
     pricing: addAuctionInformation(
       {
-        reserve: auctionDataToPricing(auctionData),
+        reserve: auctionDataToPricing(auctionData, networkId),
       },
-      currencyData
+      currencyData,
+      networkId
     ),
   };
 };

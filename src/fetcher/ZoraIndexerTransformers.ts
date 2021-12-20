@@ -1,4 +1,5 @@
 import Big from 'big.js';
+import { NetworkIDs } from '../constants/networks';
 import { ReserveAuctionPartialFragment } from '../graph-queries/zora-graph-types';
 import { IndexerTokenWithAuctionFragment } from '../graph-queries/zora-indexer-types';
 import { CurrencyLookupType, IndexerDataType } from './AuctionInfoTypes';
@@ -6,6 +7,7 @@ import { addAuctionInformation, auctionDataToPricing } from './TransformFetchRes
 
 export function transformNFTIndexerResponse(
   data: IndexerTokenWithAuctionFragment,
+  networkId: NetworkIDs,
   auction?: ReserveAuctionPartialFragment,
   currency?: CurrencyLookupType
 ): IndexerDataType {
@@ -42,9 +44,10 @@ export function transformNFTIndexerResponse(
     zoraIndexerResponse: data,
     pricing: addAuctionInformation(
       {
-        reserve: auctionDataToPricing(auction),
+        reserve: auctionDataToPricing(auction, networkId),
       },
-      currency
+      currency,
+      networkId
     ),
   };
 }

@@ -45,7 +45,10 @@ export function useEdition(
   if (res.data && res.data.length) {
     const pricing: PricingInfoData = {
       edition: {
-        salePrice: transformEditionsCurrency(res.data[0].salePrice ?? 0),
+        salePrice: transformEditionsCurrency(
+          res.data[0].salePrice ?? 0,
+          fetcher.networkId
+        ),
         totalSupply: res.data[0].totalSupply,
         editionSize: res.data[0].editionSize,
       },

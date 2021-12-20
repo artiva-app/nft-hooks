@@ -1,3 +1,4 @@
+import { Networks } from '../src/constants/networks';
 import {
   transformCurrencyForKey,
   transformCurrencyEth,
@@ -68,12 +69,15 @@ describe('TransformFetchResults', () => {
   describe('transformCurrencyEth', () => {
     it('adds in eth information when null currency', () => {
       expect(
-        transformCurrencyEth({
-          id: '0x0000000000000000000000000000000000000000',
-          symbol: '',
-          name: '',
-          decimals: null,
-        })
+        transformCurrencyEth(
+          {
+            id: '0x0000000000000000000000000000000000000000',
+            symbol: '',
+            name: '',
+            decimals: null,
+          },
+          Networks.MAINNET
+        )
       ).toMatchInlineSnapshot(`
         Object {
           "decimals": 18,
@@ -85,12 +89,15 @@ describe('TransformFetchResults', () => {
     });
     it('does not modify other null currency information', () => {
       expect(
-        transformCurrencyEth({
-          symbol: 'IGNORE',
-          id: '0x92345474e89094c44da98b954eedeac495273344',
-          name: 'IGNORE',
-          decimals: 18,
-        })
+        transformCurrencyEth(
+          {
+            symbol: 'IGNORE',
+            id: '0x92345474e89094c44da98b954eedeac495273344',
+            name: 'IGNORE',
+            decimals: 18,
+          },
+          Networks.MAINNET
+        )
       ).toMatchInlineSnapshot(`
         Object {
           "decimals": 18,

@@ -23,16 +23,30 @@ import {
 } from './AuctionInfoTypes';
 import { AuctionStateInfo, getAuctionState } from './AuctionState';
 import { ZORA_MEDIA_CONTRACT_BY_NETWORK } from '../constants/addresses';
-import { NetworkIDs } from '../constants/networks';
+import { NetworkIDs, Networks } from '../constants/networks';
 
 export const NULL_ETH_CURRENCY_ID = '0x0000000000000000000000000000000000000000';
 
-export function transformCurrencyEth(currency: CurrencyShortFragment) {
+export function transformCurrencyEth(
+  currency: CurrencyShortFragment,
+  networkId: NetworkIDs
+) {
   let updatedCurrency = { ...currency };
-  if (currency.id === NULL_ETH_CURRENCY_ID) {
+  if (
+    currency.id === NULL_ETH_CURRENCY_ID &&
+    (networkId === Networks.MAINNET || networkId === Networks.RINKEBY)
+  ) {
     updatedCurrency.decimals = 18;
     updatedCurrency.name = 'Ethereum';
     updatedCurrency.symbol = 'ETH';
+  }
+  if (
+    currency.id === NULL_ETH_CURRENCY_ID &&
+    (networkId === Networks.POLYGON || networkId === Networks.MUMBAI)
+  ) {
+    updatedCurrency.decimals = 18;
+    updatedCurrency.name = 'Matic';
+    updatedCurrency.symbol = 'MATIC';
   }
   if (!updatedCurrency.decimals) {
     // Assume default 18 decimals
@@ -83,7 +97,7 @@ export function transformMediaItem(
         bids: currentBids || [],
         ask: currentAsk || null,
       },
-      reserve: auctionDataToPricing(auctionData),
+      reserve: auctionDataToPricing(auctionData, networkId),
     },
   };
 }
@@ -101,25 +115,41 @@ export function transformMediaForKey(
 }
 
 export function auctionDataToPricing(
-  auctionData: ReserveAuctionPartialFragment | undefined
+  auctionData: ReserveAuctionPartialFragment | undefined,
+  networkId: NetworkIDs
 ) {
   if (!auctionData) {
     return null;
   }
   return {
     ...auctionData,
-    auctionCurrency: transformCurrencyEth(auctionData.auctionCurrency),
+    auctionCurrency: transformCurrencyEth(auctionData.auctionCurrency, networkId),
   };
 }
 
-export function transformEditionsCurrency(salePrice: string): PricingInfo {
-  return {
-    currency: {
+export function transformEditionsCurrency(
+  salePrice: string,
+  networkId: NetworkIDs
+): PricingInfo {
+  let currency;
+  console.log('Editions network', networkId);
+  if (networkId === Networks.POLYGON || networkId == Networks.MUMBAI) {
+    currency = {
+      id: '0x1',
+      name: 'Matic',
+      symbol: 'MATIC',
+      decimals: 18,
+    };
+  } else {
+    currency = {
       id: '0x1',
       name: 'Ether',
       symbol: 'ETH',
       decimals: 18,
-    },
+    };
+  }
+  return {
+    currency,
     prettyAmount: setCurrencyDecimal(salePrice, 18),
     amount: salePrice,
   };
@@ -160,7 +190,8 @@ const setCurrencyDecimal = (amount: string, decimals: Maybe<number>) => {
 
 export function addAuctionInformation(
   pricing: ZNFTMediaDataType['pricing'],
-  currencyInfos: CurrencyLookupType = {}
+  currencyInfos: CurrencyLookupType = {},
+  networkId: NetworkIDs
 ) {
   const getCurrencyComputedValue = (currencyId: string, bidAmount: string) => {
     const currencyInfo = currencyInfos[currencyId];
@@ -219,7 +250,7 @@ export function addAuctionInformation(
     };
   };
 
-  const getHighestReserveBid = () => {
+  const getHighestReserveBid = (networkId: NetworkIDs) => {
     if (pricing.reserve?.currentBid) {
       const { auctionCurrency, currentBid } = pricing.reserve;
       const computedValue = getCurrencyComputedValue(
@@ -230,7 +261,7 @@ export function addAuctionInformation(
         pricing: {
           amount: currentBid.amount,
           prettyAmount: setCurrencyDecimal(currentBid.amount, auctionCurrency.decimals),
-          currency: transformCurrencyEth(auctionCurrency),
+          currency: transformCurrencyEth(auctionCurrency, networkId),
           computedValue,
         },
         placedBy: currentBid.bidder.id,
@@ -240,7 +271,7 @@ export function addAuctionInformation(
     return;
   };
 
-  const getHighestPerpetualBid = () => {
+  const getHighestPerpetualBid = (networkId: NetworkIDs) => {
     const sortedBids = pricing.perpetual?.bids
       ?.map((bid) => ({
         bid,
@@ -268,7 +299,7 @@ export function addAuctionInformation(
           sortedBids[0].bid.amount,
           sortedBids[0].bid.currency.decimals
         ),
-        currency: transformCurrencyEth(sortedBids[0].bid.currency),
+        currency: transformCurrencyEth(sortedBids[0].bid.currency, networkId),
       },
       placedBy: sortedBids[0].bid.bidder.id,
       placedAt: sortedBids[0].bid.createdAtTimestamp,
@@ -289,7 +320,7 @@ export function addAuctionInformation(
             };
           })(),
           current: {
-            highestBid: getHighestReserveBid(),
+            highestBid: getHighestReserveBid(networkId),
             likelyHasEnded:
               parseInt(pricing.reserve?.expectedEndTimestamp, 10) <
               new Date().getTime() / 1000,
@@ -297,12 +328,15 @@ export function addAuctionInformation(
               pricing.reserve?.firstBidTime && pricing.reserve.firstBidTime !== '0',
           },
           reservePrice: {
-            currency: transformCurrencyEth({
-              id: pricing.reserve.auctionCurrency.id,
-              name: pricing.reserve.auctionCurrency.name,
-              symbol: pricing.reserve.auctionCurrency.symbol,
-              decimals: pricing.reserve.auctionCurrency.decimals,
-            }),
+            currency: transformCurrencyEth(
+              {
+                id: pricing.reserve.auctionCurrency.id,
+                name: pricing.reserve.auctionCurrency.name,
+                symbol: pricing.reserve.auctionCurrency.symbol,
+                decimals: pricing.reserve.auctionCurrency.decimals,
+              },
+              networkId
+            ),
             amount: pricing.reserve.reservePrice,
             prettyAmount: setCurrencyDecimal(
               pricing.reserve.reservePrice,
@@ -331,7 +365,7 @@ export function addAuctionInformation(
         ? transformAskCurrency(pricing.perpetual.ask)
         : undefined,
       bids: pricing.perpetual?.bids.map((bid) => handlePerpetualBid(bid)) || [],
-      highestBid: getHighestPerpetualBid(),
+      highestBid: getHighestPerpetualBid(networkId),
     },
     auctionType:
       pricing.reserve?.status === 'Active'
