@@ -5,13 +5,13 @@ import { getAddress } from '@ethersproject/address';
 import { RequestError } from './RequestError';
 import {
   EDITIONS_GRAPH_URL_BY_NETWORK,
-  ENS_GRAPH_URL_BY_NETWORK,
   OPENSEA_API_URL_BY_NETWORK,
   THEGRAPH_API_URL_BY_NETWORK,
   THEGRAPH_UNISWAP_URL_BY_NETWORK,
   ZORA_INDEXER_URL_BY_NETWORK,
   ZORA_USERNAME_API_URL,
 } from '../constants/urls';
+import { reverseResolveEnsAddresses } from './EnsReverseFetcher';
 import type { NetworkIDs } from '../constants/networks';
 import {
   GET_ALL_AUCTIONS,
@@ -59,11 +59,6 @@ import {
   BY_OWNER,
 } from '../graph-queries/zora-indexer';
 import { FetchZoraIndexerListCollectionType } from './ZoraIndexerTypes';
-import { RESOLVE_ENS_FROM_ADDRESS_QUERY } from '../graph-queries/ens-graph';
-import {
-  DomainResolvedPartFragment,
-  ResolveNamesQuery,
-} from '../graph-queries/ens-graph-types';
 import { ArgumentsError, NotFoundError } from './ErrorUtils';
 import { convertURIToHTTPS } from './UriUtils';
 import { EDITION_BY_ADDRESS } from '../graph-queries/editions-graph';
@@ -99,7 +94,7 @@ export class MediaFetchAgent {
     // auctionInfoLoader fetches auction info for non-zora NFTs
     auctionInfoLoader: DataLoader<string, ReserveAuctionPartialFragment>;
     // ensLoader
-    ensLoader: DataLoader<string, DomainResolvedPartFragment>;
+    ensLoader: DataLoader<string, string>;
   };
 
   constructor(network: NetworkIDs) {
@@ -117,7 +112,7 @@ export class MediaFetchAgent {
         cache: false,
         maxBatchSize: 30,
       }),
-      ensLoader: new DataLoader((keys) => this.loadEnsBatch(keys), { maxBatchSize: 400 }),
+      ensLoader: new DataLoader((keys) => this.loadEnsBatch(keys), { maxBatchSize: 100 }),
       auctionInfoLoader: new DataLoader((keys) => this.fetchAuctionNFTInfo(keys), {
         cache: false,
         maxBatchSize: 300,
@@ -179,9 +174,12 @@ export class MediaFetchAgent {
    * @throws RequestError
    */
   async fetchContentMimeType(url: string): Promise<string> {
-    const response = await new FetchWithTimeout(this.timeouts.IPFS).fetch(url, {
-      method: 'HEAD',
-    });
+    const response = await new FetchWithTimeout(this.timeouts.IPFS).fetch(
+      convertURIToHTTPS(url),
+      {
+        method: 'HEAD',
+      }
+    );
     const header = response.headers.get('content-type');
     if (!header) {
       throw new RequestError('No content type returned for URI');
@@ -232,20 +230,12 @@ export class MediaFetchAgent {
   }
 
   async loadEnsBatch(addresses: readonly string[]) {
-    const fetchWithTimeout = new FetchWithTimeout(this.timeouts.Graph);
-    const client = new GraphQLClient(ENS_GRAPH_URL_BY_NETWORK[this.networkId], {
-      fetch: fetchWithTimeout.fetch,
-    });
-
-    const ensResponse = (await client.request(RESOLVE_ENS_FROM_ADDRESS_QUERY, {
-      addresses: addresses.map((address) => address.toLowerCase()),
-    })) as ResolveNamesQuery;
-    return addresses.map(
-      (address) =>
-        ensResponse.domains.find(
-          (domain) => domain.resolvedAddress?.id.toLowerCase() === address.toLowerCase()
-        ) || new Error('Not found')
+    const addressToNames = await reverseResolveEnsAddresses(
+      addresses,
+      this.networkId,
+      this.timeouts.Rpc
     );
+    return addresses.map((address) => addressToNames[address] || Error('Not found'));
   }
 
   // Alpha: uses zora indexer

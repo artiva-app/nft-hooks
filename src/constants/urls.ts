@@ -13,6 +13,11 @@ export const ENS_GRAPH_URL_BY_NETWORK = {
   [Networks.RINKEBY]: 'https://api.thegraph.com/subgraphs/name/ensdomains/ensrinkeby',
 };
 
+export const RPC_URL_BY_NETWORK = {
+  [Networks.MAINNET]: 'https://cloudflare-eth.com',
+  [Networks.RINKEBY]: 'https://rinkeby-light.eth.linkpool.io',
+};
+
 export const ZORA_INDEXER_URL_BY_NETWORK = {
   [Networks.MAINNET]: 'https://indexer-prod-mainnet.zora.co/v1/graphql',
   [Networks.RINKEBY]: 'https://indexer-dev-rinkeby.zora.co/v1/graphql',
