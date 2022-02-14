@@ -552,7 +552,7 @@ export class MediaFetchAgent {
         urlParams.push(`token_ids=${tokenId}&asset_contract_addresses=${address}`);
       });
     const response = await fetchWithTimeout.fetch(
-      `${apiBase}assets?${urlParams.join('&')}&order_direction=desc&offset=0&limit=50`
+      `${apiBase}assets?${urlParams.join('&')}&order_direction=desc&limit=50`
     );
     const responseJson = await response.json();
 

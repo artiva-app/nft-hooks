@@ -1,6 +1,6 @@
 {
   "name": "@artiva/nft-hooks",
-  "version": "0.8.16",
+  "version": "0.8.23",
   "description": "Generic react hooks for fetching zora auctions, nfts, and data on arbitary 721s. Powers nft-components.",
   "repository": "https://github.com/artiva/nft-hooks",
   "homepage": "https://github.com/artiva/nft-hooks#README",
@@ -63,6 +63,7 @@
     "dataloader": "^2.0.0",
     "graphql": "^15.5.0",
     "graphql-request": "^3.4.0",
+    "js-base64": "^3.7.2",
     "node-abort-controller": "^2.0.0",
     "react": "^17.0.2",
     "react-test-renderer": "^17.0.2",

@@ -1,4 +1,5 @@
 import { EditionPartialFragment } from '../graph-queries/editions-graph-types';
+import { encode } from 'js-base64';
 
 export type EditionNFTDataType = {
   nft: {
@@ -37,7 +38,7 @@ export const transformEditionResponse = (
         address: data.address,
       },
       tokenId: null,
-      metadataURI: btoa(
+      metadataURI: encode(
         JSON.stringify({
           name: data.name,
           description: data.description,
