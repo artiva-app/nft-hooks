@@ -31,7 +31,7 @@ export const THEGRAPH_UNISWAP_URL_BY_NETWORK = {
 
 export const OPENSEA_API_URL_BY_NETWORK = {
   [Networks.MAINNET]: 'https://api.opensea.io/api/v1/',
-  [Networks.RINKEBY]: 'https://rinkeby-api.opensea.io/api/v1/',
+  [Networks.RINKEBY]: 'https://testnets-api.opensea.io/api/v1/',
 };
 
 export const EDITIONS_GRAPH_URL_BY_NETWORK = {
